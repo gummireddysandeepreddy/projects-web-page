@@ -10,7 +10,7 @@ export default async function Page() {
 	const { user } = await validateRequest();
 	if (!user) {
 		return redirect("/login");
-	}if (user?.username == "Chinna") {
+	}if (user?.username == "admin") {
 		return redirect("/admin");
 	}
 	return (
