@@ -1,4 +1,3 @@
-import Link from "next/link";
 
 import { db } from "@/lib/db";
 import { verify } from "@node-rs/argon2";
@@ -7,9 +6,7 @@ import { lucia, validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { Form } from "@/lib/form";
 
-import type { DatabaseUser } from "@/lib/db";
 import type { ActionResult } from "@/lib/form";
-import { ResultSet } from "@libsql/client";
 
 import { Button } from "@/components/ui/button"
 import {
@@ -54,7 +51,7 @@ export default async function Page() {
 				</Form>
 			</CardContent>
 			<CardFooter>
-				<Link href="/signup">Sign up</Link>
+				{/* <Link href="/signup">Sign up</Link> */}
 			</CardFooter>
 		</Card>
 		</div>
@@ -67,8 +64,7 @@ async function login(_: any, formData: FormData): Promise<ActionResult> {
 	if (
 		typeof username !== "string" ||
 		username.length < 3 ||
-		username.length > 31 ||
-		/^[a-z0-9_-]+$/.test(username)
+		username.length > 31
 	) {
 		return {
 			error: "Invalid username"
@@ -113,7 +109,7 @@ async function login(_: any, formData: FormData): Promise<ActionResult> {
 			error: "Incorrect username or password"
 		};
 	}
-	const id = existingUser.id as string;
+	const id: string = existingUser.id as string;
 	const session = await lucia.createSession(id, {});
 	const sessionCookie = lucia.createSessionCookie(session.id);
 	cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
