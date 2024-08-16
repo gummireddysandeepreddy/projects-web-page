@@ -15,7 +15,7 @@ export default async function Page() {
 	if (!user) {
 		return redirect("/login");
 	}
-	if (user?.username != "Chinna") {
+	if (user?.username != "admin") {
 		return redirect("/");
 	}
 	return (
