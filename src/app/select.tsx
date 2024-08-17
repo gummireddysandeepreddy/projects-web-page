@@ -12,7 +12,7 @@ export default function Select() {
 	};
     return (
         <div>
-			<form className="flex flex-row gap-4">
+			<form className="flex lg:flex-row flex-col gap-4">
 				<label className="text-2xl">Faculty Details</label>
 				<select value={value} onChange={handleValue}>
 				{year.map((detail) => (
