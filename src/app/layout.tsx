@@ -21,7 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(inter.className, "h-full")}>
         <Provider>
-          <ModeToggle />
+          <div className="sticky top-0" >
+            <ModeToggle />
+          </div>
           {children}
         </Provider>
       </body>

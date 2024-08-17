@@ -1,10 +1,11 @@
-import { lucia, validateRequest } from "@/lib/auth";
 import { Form } from "@/lib/form";
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
 import { Button } from "@/components/ui/button";
+import { lucia, validateRequest } from "@/lib/auth";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { ActionResult } from "@/lib/form";
+import Select from "./select";
 
-import type { ActionResult } from "@/lib/form";
 
 export default async function Page() {
 	const { user } = await validateRequest();
@@ -14,13 +15,14 @@ export default async function Page() {
 		return redirect("/admin");
 	}
 	return (
-		<div className="flex items-center justify-center h-full">
-			<div className="p-6 bg-muted border-primary border-4">
-				<h1>Hi, {user.username}!</h1>
-				<p>Your user ID is {user.id}.</p>
+		<div className="h-full">
+			<div className="absolute right-0 top-0">
 				<Form action={logout}>
 					<Button className="w-full">Sign out</Button>
 				</Form>
+			</div>
+			<div className="flex justify-center items-center h-full">
+				<Select/>
 			</div>
 		</div>
 	);
